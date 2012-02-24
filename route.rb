@@ -34,8 +34,8 @@ class Route
   end
   
   def add(other_route)
-    total_cost = @cost_in_pennies + other_route.cost_in_pennies
-    total_time = @time_in_seconds + other_route.time_in_seconds
-    Route.new(origin, other_route.destination, total_cost, total_time)
+      sum_cost_in_pennies = @cost_in_pennies + other_route.cost_in_pennies
+      sum_time_in_seconds = @time_in_seconds + other_route.time_in_seconds
+      Route.new(origin, other_route.destination, sum_cost_in_pennies, sum_time_in_seconds)
   end
 end

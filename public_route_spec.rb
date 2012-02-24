@@ -16,7 +16,7 @@ describe PublicRoute do
   end
     
   it "should return a route with somewhee near the right duration" do
-    @public.time_in_seconds.should be_within(120).of(660)
+    @public.time_in_seconds.should be_within(300).of(660)
   end
   
   it "should return a route with somewhere near the right time and cost" do

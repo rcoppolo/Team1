@@ -20,7 +20,7 @@ class BartDirectory
     stations_uri = 'http://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V'
     
     doc = Nokogiri::HTML(open(stations_uri))
-    doc.xpath('//address').each {|address| @station_addresses << address.content }
+    doc.xpath('//address').each {|address| @station_addresses << address.content + ", CA" }
     doc.xpath('//abbr').each {|abbr| @station_abbrs << abbr.content }    
 
     @station_addresses.length.times do |i|
@@ -35,7 +35,6 @@ class BartDirectory
     @station_addresses.length.times do |i|
       @address_to_lat_long[@station_addresses[i]] = @station_lat_longs[i]
     end
-     puts @address_to_lat_long
   end
   
   def bart_address?(address)

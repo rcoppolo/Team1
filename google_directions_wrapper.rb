@@ -12,7 +12,8 @@ class GoogleDirectionsWrapper
     @origin = origin
     @destination = destination
     @mode = mode
-    @response_json = JSON.parse(open("json_cached_output1.json").read)
+    # @response_json = JSON.parse(open("json_cached_output1.json").read)
+    fetch
     
   end
   
