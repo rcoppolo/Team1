@@ -1,6 +1,6 @@
 require './route'
 require './gas_price'
-require './google_directions_wrapper'
+# require './google_directions_wrapper'
 
 class DriveRoute < Route
 
@@ -12,21 +12,27 @@ class DriveRoute < Route
 	  @google_directions.fetch
 	  @origin = origin
     @destination = destination
-    
-	  @time_in_seconds = calc_drive_time
-	  @cost_in_pennies = calc_drive_cost
-	  
-
 	end
-
-	def calc_drive_time()
-	  @google_directions.route_time
+	
+	def time_in_seconds
+	  @time_in_seconds ||= calc_drive_time
 	end
-
-	def calc_drive_cost()
-	  distance_in_miles = @google_directions.route_distance
-	  zipcode = @google_directions.origin_zipcode
-	  (distance_in_miles / 25 * ( 100 * GasPrice.find_gas_price(zipcode))).to_i   # assumes 25mpg at $4/gallon (400 pennies)
+	
+	def cost_in_pennies
+	  @cost_in_pennies ||= calc_drive_cost
 	end
+	
+	
+	private
+
+  def calc_drive_time()
+    @google_directions.route_time
+  end
+  
+  def calc_drive_cost()
+    distance_in_miles = @google_directions.route_distance
+    zipcode = @google_directions.origin_zipcode
+    (distance_in_miles / 25 * ( 100 * GasPrice.find_gas_price(zipcode))).to_i   # assumes 25mpg at $4/gallon (400 pennies)
+  end
 
 end

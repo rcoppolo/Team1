@@ -5,10 +5,15 @@ require './drive_route'
 
 describe 'DriveRoute' do
     before(:each) do
-       @driving_route = DriveRoute.new("923 Market St., San Francisco, CA", "1703 Telegraph Avenue, Oakland, CA")  
+      @origin = "923 Market St., San Francisco, CA"
+      @destination = "1703 Telegraph Avenue, Oakland, CA"
+      @driving_route = DriveRoute.new(@origin, @destination)  
      end
 
     it "when passed a driving route, returns a route object" do
+      google_directions = File.open("json_cached_output1.json").read
+      GoogleDirectionsWrapper = double('DriveRoute::GoogleDirectionsWrapper')
+      GoogleDirectionsWrapper.stub!(:new).with(@origin, @destination).and_return (google_directions.to_s)
       @driving_route.should be_an_instance_of DriveRoute
       @driving_route.origin.should be_an_instance_of String
       @driving_route.destination.should be_an_instance_of String
