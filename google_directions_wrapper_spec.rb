@@ -4,8 +4,6 @@ describe 'GoogleDirectionsWrapper' do
   
   before(:each) do
     @wrapper = GoogleDirectionsWrapper.new("923 Market Street, San Francisco, CA", "1703 Telegraph Avenue, Oakland, CA")
-    # @wrapper = mock "wrapper"
-    # @wrapper.stub!(:response_json).and_yield(JSON.parse(open("json_cached_output1.json").read))
     @wrapper.response_json = JSON.parse(open("json_cached_output1.json").read)
   end
   
